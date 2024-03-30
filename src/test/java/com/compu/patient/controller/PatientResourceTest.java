@@ -88,7 +88,7 @@ public class PatientResourceTest {
         given()
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
-                .body(new PatientRequestDTO())
+                .body(createMockPatientDTO())
                 .when().post("/patient")
                 .then()
                 .log().all()
@@ -106,7 +106,7 @@ public class PatientResourceTest {
 
         given()
                 .contentType(ContentType.JSON)
-                .body(new PatientRequestDTO())
+                .body(createMockPatientDTO())
                 .when().put("/patient/1")
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode())

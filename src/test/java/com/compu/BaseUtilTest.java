@@ -28,6 +28,7 @@ public abstract class BaseUtilTest {
                 .visitType(VisitType.HOME)
                 .reason("Routine checkup")
                 .familyHistory("No family history")
+                .patientId(1L)
                 .build();
     }
 
@@ -38,6 +39,7 @@ public abstract class BaseUtilTest {
                 .visitType(VisitType.HOME)
                 .reason("Routine checkup")
                 .familyHistory("No family history")
+                .patientId(1L)
                 .build();
     }
 

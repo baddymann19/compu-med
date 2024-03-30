@@ -5,6 +5,7 @@ import com.compu.patient.model.PatientRequestDTO;
 import com.compu.patient.service.PatientService;
 import io.smallrye.mutiny.Uni;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import org.jboss.resteasy.reactive.RestResponse;
@@ -22,7 +23,7 @@ public class PatientResource {
     PatientService patientService;
 
     @POST
-    public Uni<RestResponse<PatientDTO>> createPatient(PatientRequestDTO requestDTO) {
+    public Uni<RestResponse<PatientDTO>> createPatient(@Valid PatientRequestDTO requestDTO) {
         return patientService.createPatient(requestDTO)
                 .map(createdPatient -> RestResponse.status(CREATED, createdPatient));
     }
@@ -43,7 +44,7 @@ public class PatientResource {
 
     @PUT
     @Path("/{id}")
-    public Uni<RestResponse<PatientDTO>> updatePatient(@PathParam("id") Long id, PatientRequestDTO requestDTO) {
+    public Uni<RestResponse<PatientDTO>> updatePatient(@PathParam("id") Long id, @Valid PatientRequestDTO requestDTO) {
         return patientService.updatePatient(id, requestDTO)
                 .map(updatedPatient -> RestResponse.status(OK, updatedPatient));
     }
