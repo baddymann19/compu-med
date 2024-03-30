@@ -50,7 +50,7 @@ public class VisitResourceTest {
                 .then()
                 .statusCode(200)
                 .log().all()
-                .body("[0].reason", is(visitDTO.getReason()))
+                .body("[0].reason", is(visitDTO.getReason().toString()))
                 .body("[0].visitType", is(visitDTO.getVisitType().toString()));
     }
 
@@ -64,7 +64,7 @@ public class VisitResourceTest {
                 .then()
                 .statusCode(200)
                 .body("id", is(1))
-                .body("reason", is(visitDTO.getReason()))
+                .body("reason", is(visitDTO.getReason().toString()))
                 .body("visitType", is(visitDTO.getVisitType().toString()));
     }
 
@@ -89,7 +89,7 @@ public class VisitResourceTest {
                 .when().post("/api/visit")
                 .then()
                 .statusCode(201)
-                .body("reason", is(visitDTO.getReason()))
+                .body("reason", is(visitDTO.getReason().toString()))
                 .body("visitType", is(visitDTO.getVisitType().toString()));
     }
 

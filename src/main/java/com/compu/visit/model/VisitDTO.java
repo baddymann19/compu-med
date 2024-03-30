@@ -15,7 +15,7 @@ public class VisitDTO {
 
     private LocalDateTime dateTime;
     private VisitType visitType;
-    private String reason;
+    private Reason reason;
     private String familyHistory;
 
     private Long patientId;

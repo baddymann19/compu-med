@@ -18,7 +18,7 @@ public class Visit extends PanacheEntityBase {
     public Long id;
     private LocalDateTime dateTime;
     private VisitType visitType;
-    private String reason;
+    private Reason reason;
     private String familyHistory;
     private Long patientId;
 

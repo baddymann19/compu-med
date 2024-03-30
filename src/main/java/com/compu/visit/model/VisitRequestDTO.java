@@ -20,8 +20,8 @@ public class VisitRequestDTO {
 
     @NotNull(message="visitType may not null")
     private VisitType visitType;
-    @NotBlank(message="reason may not be blank")
-    private String reason;
+    @NotNull(message="reason may not be blank")
+    private Reason reason;
     private String familyHistory;
     @NotNull(message="patientId may not be blank")
     private Long patientId;

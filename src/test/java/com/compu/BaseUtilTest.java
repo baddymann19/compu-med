@@ -2,10 +2,7 @@ package com.compu;
 
 import com.compu.patient.model.Patient;
 import com.compu.patient.model.PatientDTO;
-import com.compu.visit.model.Visit;
-import com.compu.visit.model.VisitDTO;
-import com.compu.visit.model.VisitRequestDTO;
-import com.compu.visit.model.VisitType;
+import com.compu.visit.model.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,7 +13,7 @@ public abstract class BaseUtilTest {
                 .id(id)
                 .dateTime(LocalDateTime.now())
                 .visitType(VisitType.HOME)
-                .reason("Routine checkup")
+                .reason(Reason.FIRST)
                 .familyHistory("No family history")
                 .build();
     }
@@ -26,7 +23,7 @@ public abstract class BaseUtilTest {
                 .id(1L)
                 .dateTime(LocalDateTime.now())
                 .visitType(VisitType.HOME)
-                .reason("Routine checkup")
+                .reason(Reason.FIRST)
                 .familyHistory("No family history")
                 .patientId(1L)
                 .build();
@@ -37,7 +34,7 @@ public abstract class BaseUtilTest {
                 .id(1L)
                 .dateTime(LocalDateTime.now())
                 .visitType(VisitType.HOME)
-                .reason("Routine checkup")
+                .reason(Reason.FIRST)
                 .familyHistory("No family history")
                 .patientId(1L)
                 .build();
