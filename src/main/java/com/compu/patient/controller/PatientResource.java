@@ -14,7 +14,7 @@ import java.util.List;
 
 import static jakarta.ws.rs.core.Response.Status.*;
 
-@Path("/patient")
+@Path("/api/patient")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class PatientResource {

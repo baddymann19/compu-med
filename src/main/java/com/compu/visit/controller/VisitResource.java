@@ -14,7 +14,7 @@ import java.util.List;
 
 import static jakarta.ws.rs.core.Response.Status.*;
 
-@Path("/visits")
+@Path("/api/visit")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class VisitResource {

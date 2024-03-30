@@ -42,7 +42,7 @@ public class PatientResourceTest {
         when(patientService.getAllPatients()).thenReturn(Uni.createFrom().item(Collections.singletonList(mockPatientDTO)));
 
         given()
-                .when().get("/patient")
+                .when().get("/api/patient")
                 .then()
                 .log().all()
                 .statusCode(Response.Status.OK.getStatusCode())
@@ -59,7 +59,7 @@ public class PatientResourceTest {
         when(patientService.getPatientById(1L)).thenReturn(Uni.createFrom().item(mockPatientDTO));
 
         given()
-                .when().get("/patient/{id}", 1L)
+                .when().get("/api/patient/{id}", 1L)
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode())
                 .contentType(ContentType.JSON)
@@ -75,7 +75,7 @@ public class PatientResourceTest {
         when(patientService.getPatientById(1L)).thenThrow(new NotFoundException("Visit not found"));
 
         given()
-                .when().get("/patient/1")
+                .when().get("/api/patient/1")
                 .then()
                 .statusCode(404);
     }
@@ -89,7 +89,7 @@ public class PatientResourceTest {
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .body(createMockPatientDTO())
-                .when().post("/patient")
+                .when().post("/api/patient")
                 .then()
                 .log().all()
                 .statusCode(Response.Status.CREATED.getStatusCode())
@@ -107,7 +107,7 @@ public class PatientResourceTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(createMockPatientDTO())
-                .when().put("/patient/1")
+                .when().put("/api/patient/1")
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode())
                 .contentType(ContentType.JSON)
@@ -122,7 +122,7 @@ public class PatientResourceTest {
         when(patientService.deletePatient(anyLong())).thenReturn(Uni.createFrom().item(true));
 
         given()
-                .when().delete("/patient/1")
+                .when().delete("/api/patient/1")
                 .then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }

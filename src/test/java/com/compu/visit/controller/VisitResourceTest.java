@@ -46,7 +46,7 @@ public class VisitResourceTest {
         VisitDTO visitDTO = createVisitDTO();
         when(visitService.getAllVisits()).thenReturn(Uni.createFrom().item(Collections.singletonList(createVisitDTO())));
         given()
-                .when().get("/visits")
+                .when().get("/api/visit")
                 .then()
                 .statusCode(200)
                 .log().all()
@@ -60,7 +60,7 @@ public class VisitResourceTest {
         when(visitService.getVisitById(anyLong())).thenReturn(Uni.createFrom().item(visitDTO));
 
         given()
-                .when().get("/visits/1")
+                .when().get("/api/visit/1")
                 .then()
                 .statusCode(200)
                 .body("id", is(1))
@@ -73,7 +73,7 @@ public class VisitResourceTest {
         when(visitService.getVisitById(anyLong())).thenThrow(new NotFoundException("Visit not found"));
 
         given()
-                .when().get("/visits/1")
+                .when().get("/api/visit/1")
                 .then()
                 .statusCode(404);
     }
@@ -86,7 +86,7 @@ public class VisitResourceTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(createVisitRequestDTO())
-                .when().post("/visits")
+                .when().post("/api/visit")
                 .then()
                 .statusCode(201)
                 .body("reason", is(visitDTO.getReason()))
@@ -100,7 +100,7 @@ public class VisitResourceTest {
         given()
                 .contentType(ContentType.JSON)
                 .body(createVisitRequestDTO())
-                .when().put("/visits/1")
+                .when().put("/api/visit/1")
                 .then()
                 .statusCode(200);
     }
@@ -110,7 +110,7 @@ public class VisitResourceTest {
         when(visitService.deleteVisit(anyLong())).thenReturn(Uni.createFrom().item(true));
 
         given()
-                .when().delete("/visits/1")
+                .when().delete("/api/visit/1")
                 .then()
                 .statusCode(200);
     }
