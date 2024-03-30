@@ -5,6 +5,6 @@ import io.quarkus.hibernate.reactive.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class PatientRepository implements PanacheRepositoryBase<Visit, Long> {
+public class VisitRepository implements PanacheRepositoryBase<Visit, Long> {
 
 }

@@ -1,7 +1,6 @@
 package com.compu.patient.controller;
 
 
-import com.compu.patient.model.Patient;
 import com.compu.patient.model.PatientDTO;
 import com.compu.patient.model.PatientRequestDTO;
 import com.compu.patient.service.PatientService;
@@ -16,9 +15,9 @@ import org.mockito.Mockito;
 
 import jakarta.ws.rs.core.Response;
 
-import java.time.LocalDate;
 import java.util.Collections;
 
+import static com.compu.BaseUtilTest.createMockPatientDTO;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
@@ -128,21 +127,4 @@ public class PatientResourceTest {
                 .statusCode(Response.Status.OK.getStatusCode());
     }
 
-    private PatientDTO createMockPatientDTO() {
-        return PatientDTO.builder()
-                .id(1L)
-                .name("Test Name")
-                .surname("Test Surname")
-                .dateOfBirth(LocalDate.now())
-                .socialSecurityNumber("123-45-6789")
-                .build();
-    }
-    private Patient createMockPatient() {
-        return Patient.builder()
-                .name("Test Name")
-                .surname("Test Surname")
-                .dateOfBirth(LocalDate.now())
-                .socialSecurityNumber("123-45-6789")
-                .build();
-    }
 }

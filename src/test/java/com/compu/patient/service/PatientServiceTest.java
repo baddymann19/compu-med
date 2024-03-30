@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 
-import java.time.LocalDate;
-
+import static com.compu.BaseUtilTest.createMockPatient;
+import static com.compu.BaseUtilTest.createMockPatientDTO;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -39,32 +39,24 @@ public class PatientServiceTest {
         patientService.patientConverter = patientConverter;
     }
 
-//    @Test
-//    public void testGetAllPatients() {
-//        PatientDTO patientDTO = new PatientDTO();
-//        Uni<List<Patient>> item = Uni.createFrom().item(Collections.singletonList(createMockPatient()));
-//        when(patientRepository.findAll()).thenAnswer(invocation -> {} Uni.createFrom().item(Collections.singletonList(createMockPatient())));
-//       // when(patientConverter.toDTO(any(Patient.class))).thenReturn(patientDTO);
-//        Uni<List<PatientDTO>> result = patientService.getAllPatients();
-//        assertEquals(1, result.await().indefinitely().size());
-//    }
-
     @Test
     public void testGetPatientByIdNotFound() {
         when(patientRepository.findById(anyLong())).thenReturn(Uni.createFrom().nullItem());
-        assertThrows(NotFoundException.class, () -> {
-            patientService.getPatientById(1L).await().indefinitely();
-        });
+        assertThrows(NotFoundException.class, () -> patientService.getPatientById(1L).await().indefinitely());
+        Mockito.verify(patientConverter, Mockito.times(0)).toDTO(any(Patient.class));
+        Mockito.verify(patientRepository, Mockito.times(1)).findById(anyLong());
     }
 
     @Test
     public void testGetPatientById() {
-        PatientDTO patientDTO = new PatientDTO();
+        PatientDTO patientDTO = createMockPatientDTO();
         when(patientRepository.findById(anyLong())).thenReturn(Uni.createFrom().item(createMockPatient()));
         when(patientConverter.toDTO(any(Patient.class))).thenReturn(patientDTO);
 
         Uni<PatientDTO> result = patientService.getPatientById(1L);
         assertEquals(patientDTO, result.await().indefinitely());
+        Mockito.verify(patientConverter, Mockito.times(1)).toDTO(any(Patient.class));
+        Mockito.verify(patientRepository, Mockito.times(1)).findById(anyLong());
     }
 
     @Test
@@ -110,24 +102,4 @@ public class PatientServiceTest {
         assertTrue(result.await().indefinitely());
     }
 
-    private Patient createMockPatient() {
-        return Patient.builder()
-                .id(1L)
-                .name("Test Name")
-                .surname("Test Surname")
-                .dateOfBirth(LocalDate.now())
-                .socialSecurityNumber("123-45-6789")
-                .build();
-    }
-
-    private PatientDTO createMockPatientDTO() {
-        Patient mockPatient = createMockPatient();
-        return PatientDTO.builder()
-                .id(mockPatient.getId())
-                .name(mockPatient.getName())
-                .surname(mockPatient.getSurname())
-                .dateOfBirth(mockPatient.getDateOfBirth())
-                .socialSecurityNumber(mockPatient.getSocialSecurityNumber())
-                .build();
-    }
 }

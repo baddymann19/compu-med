@@ -18,5 +18,5 @@ public class VisitDTO {
     private String reason;
     private String familyHistory;
 
-    private PatientDTO patient;
+    private Long patientId;
 }

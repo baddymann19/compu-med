@@ -20,6 +20,6 @@ public class Visit extends PanacheEntityBase {
     private VisitType visitType;
     private String reason;
     private String familyHistory;
-    public  Long patienceId;
+    private Long patientId;
 
 }

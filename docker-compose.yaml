@@ -10,7 +10,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      - QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://compu-db:5432/medicals
+      - QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://compu-db:5432/mydb
       - QUARKUS_DATASOURCE_USERNAME=myuser
       - QUARKUS_DATASOURCE_PASSWORD=mypassword
     depends_on:
@@ -23,11 +23,13 @@ services:
   db:
     image: postgres:13
     environment:
-      - POSTGRES_DB=medicals
+      - POSTGRES_DB=mydb
       - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=mypassword
     volumes:
       - db-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
     networks:
       compu:
         aliases:

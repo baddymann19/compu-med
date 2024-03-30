@@ -3,7 +3,6 @@ package com.compu.visit.controller;
 
 import com.compu.visit.model.VisitDTO;
 import com.compu.visit.model.VisitRequestDTO;
-import com.compu.visit.model.VisitType;
 import com.compu.visit.service.VisitService;
 import io.quarkus.test.junit.QuarkusMock;
 import io.quarkus.test.junit.QuarkusTest;
@@ -11,9 +10,6 @@ import io.restassured.http.ContentType;
 import io.smallrye.mutiny.Uni;
 import jakarta.ws.rs.NotFoundException;
 import org.junit.jupiter.api.Test;
-
-
-import java.time.LocalDateTime;
 
 import static io.restassured.RestAssured.given;
 import static org.mockito.ArgumentMatchers.any;
@@ -28,6 +24,8 @@ import org.mockito.Spy;
 import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.is;
+import static com.compu.BaseUtilTest.createVisitDTO;
+import static com.compu.BaseUtilTest.createVisitRequestDTO;
 
 
 @QuarkusTest
@@ -115,25 +113,5 @@ public class VisitResourceTest {
                 .when().delete("/visits/1")
                 .then()
                 .statusCode(200);
-    }
-
-    private VisitDTO createVisitDTO() {
-        return VisitDTO.builder()
-                .id(1L)
-                .dateTime(LocalDateTime.now())
-                .visitType(VisitType.HOME)
-                .reason("Routine checkup")
-                .familyHistory("No family history")
-                .build();
-    }
-
-    private VisitRequestDTO createVisitRequestDTO() {
-        return VisitRequestDTO.builder()
-                .id(1L)
-                .dateTime(LocalDateTime.now())
-                .visitType(VisitType.HOME)
-                .reason("Routine checkup")
-                .familyHistory("No family history")
-                .build();
     }
 }
