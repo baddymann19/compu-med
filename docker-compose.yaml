@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DB_CONN: compu-db:5432
+    ports:
+      - 8080:8080
+    environment:
+      - QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://compu-db:5432/medicals
+      - QUARKUS_DATASOURCE_USERNAME=myuser
+      - QUARKUS_DATASOURCE_PASSWORD=mypassword
+    depends_on:
+      - db
+    networks:
+      compu:
+        aliases:
+          - compu-app
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=medicals
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      compu:
+        aliases:
+          - compu-db
+
+volumes:
+  db-data:
+    name: db-data
+
+networks:
+  compu:
+    driver: bridge
+    name: compu-network
+    driver_opts:
+      com.docker.network.bridge.name: compu-network

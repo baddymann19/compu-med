@@ -1,0 +1,10 @@
+*
+!pom.xml
+!mvnw
+!.mvn
+!go.sh
+!src/
+!target/*-runner
+!target/*-runner.jar
+!target/lib/*
+!target/quarkus-app/*
